@@ -2,6 +2,6 @@
 person1=Devi
 person2=Tarun
 
-$person1: Hi $person2, How are you?
-$person2: Hi $person1, i am good how are you?
-$person1: i am good $person2, Thank YOu!
+$person1:: Hi $person2, How are you?
+$person2:: Hi $person1, i am good how are you?
+$person1:: i am good $person2, Thank YOu!
