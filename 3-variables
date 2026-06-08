@@ -2,4 +2,6 @@
 echo " enter your Pin:"
 read -s Pin
 
+echo " Welcome to Shell Scripting"
+
 
