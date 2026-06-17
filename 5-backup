@@ -52,7 +52,7 @@ if [ ! -z "$files" ]
 then
   echo "files found in $Source_directory to zip."
     Timestamp=$(date +%F-%H-%M-%S)
-    zipfile="$Destination_directory/app-logs-$Timestamp.zip"
+    zipfile="$Destination_directory/app-logs-$Timestamp-$files.zip"
     echo "$files" | zip -@ "$zipfile"
 
 
