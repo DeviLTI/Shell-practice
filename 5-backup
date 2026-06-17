@@ -5,12 +5,12 @@ Source_directory=$1
 Destination_directory=$2
 days=${3:-14}
 
-R="\e[31"
-G="\e[32"
-Y="\e[33"
-N="\e[0"
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
 
-Logfolder="/var/logs/shell-logs"
+Logfolder="/var/log/shell-logs"
 Scriptname=$(echo $0 | cut -d '.' -f1)
 logfile="$Logfolder/$Scriptname.log"
 
@@ -46,7 +46,7 @@ echo -e " $R Destination directory not exist..please check $N"
 exit 1
 fi
 
-files=$(find $Source_directory -name "*.log" -mtime +$days)
+files=$(find "$Source_directory" -name "*.log" -mtime +"$days")
 
 if [ ! -z "$files" ]
 then
@@ -56,17 +56,17 @@ then
  find "$Source_directory" -name "*.log" -mtime +"$days" | zip -@ "$zipfile"
 
 
-    if [ -f $zipfile ]
+    if [ -f "$zipfile" ]
     then
-        echo " $file zip creation $G success $N"
+        echo " $zipfile zip creation $G success $N"
         while IFS=read -r filepath
         do 
         echo "Removing from Source_directory are : $filepath"
-        rm -rf $filepath
-        done<<<$files
+        rm -rf "$filepath"
+        done<<< "$files"
         echo "Removal of $files from Source directory $G Success $N"
     else
-        echo "$file zip creation was $R Failed $N" 
+        echo "$zipfile zip creation was $R Failed $N" 
         exit 1
     fi
 
