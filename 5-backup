@@ -53,7 +53,7 @@ then
   echo "files found in $Source_directory to zip."
     Timestamp=$(date +%F-%H-%M-%S)
     zipfile="$Destination_directory/app-logs-$Timestamp.zip"
- find "$Source_directory" -name "*.log" -mtime +"$days" | zip -@ "$zipfile"
+    echo "$files" | zip -@ "$zipfile"
 
 
     if [ -f "$zipfile" ]
