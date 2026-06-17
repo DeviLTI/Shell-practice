@@ -34,15 +34,15 @@ then
 usage
 fi
 
-if [ ! -d $Source_directory]
+if [ ! -d $Source_directory ]
 then 
-echo -e " $R Source directory not exist..please check $N "
+echo -e " $R Source directory not exist..please check $N"
 exit 1
 fi
 
-if [ ! -d $Destination_directory]
+if [ ! -d $Destination_directory ]
 then 
-echo -e " $R Destination directory not exist..please check $N "
+echo -e " $R Destination directory not exist..please check $N"
 exit 1
 fi
 
