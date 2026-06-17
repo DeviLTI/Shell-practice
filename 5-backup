@@ -58,19 +58,19 @@ then
 
     if [ -f "$zipfile" ]
     then
-        echo " $zipfile zip creation $G success $N"
-        while IFS=read -r filepath
+        echo -e " $files zip creation $G success $N"
+        while IFS = read -r filepath
         do 
         echo "Removing from Source_directory are : $filepath"
         rm -rf "$filepath"
         done<<< "$files"
-        echo "Removal of $files from Source directory $G Success $N"
+        echo -e "Removal of $files from Source directory $G Success $N"
     else
-        echo "$zipfile zip creation was $R Failed $N" 
+        echo -e "$files zip creation was $R Failed $N" 
         exit 1
     fi
 
 else
-echo "files not found in $Source_directory to zip.. $Y Skipping it $N"
+echo -e "files not found in $Source_directory to zip.. $Y Skipping it $N"
 exit 1
 fi
