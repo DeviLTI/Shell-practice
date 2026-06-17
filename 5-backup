@@ -59,7 +59,7 @@ then
     if [ -f "$zipfile" ]
     then
         echo -e " $files zip creation $G success $N"
-        while IFS = read -r filepath
+        while IFS= read -r filepath
         do 
         echo "Removing from Source_directory are : $filepath"
         rm -rf "$filepath"
