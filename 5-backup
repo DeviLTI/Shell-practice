@@ -1,0 +1,74 @@
+#!/bin/bash
+
+userid=$(id -u)
+Source_directory=$1
+Destination_directory=$2
+days=${3:-14}
+
+R="\e[31"
+G="\e[32"
+Y="\e[33"
+N="\e[0"
+
+Logfolder="/var/logs/shell-logs"
+Scriptname=$(echo $0 | cut -d '.' -f1)
+logfile="$Logfolder/$Scriptname.log"
+
+if [ $userid -ne 0]
+then 
+echo "Run this script with root user"
+exit 1
+else
+echo "You are running with sudo"
+fi
+
+mkdir -p $Logfolder
+
+usage(){
+    echo -e " $R Usage:: $N backup.sh ./source_directory/ ./Destination_directory days(Optional)"
+    exit 1
+}
+
+if [ $# -lt 2 ]
+then
+usage
+fi
+
+if [ ! -d $Source_directory]
+then 
+echo -e " $R Source directory not exist..please check $N "
+exit 1
+fi
+
+if [ ! -d $Destination_directory]
+then 
+echo -e " $R Destination directory not exist..please check $N "
+exit 1
+fi
+
+files=$(find $Source_directory -name "*.log" -mtime +$days)
+if [ ! -z $files]
+then
+  echo "files found in $Source_directory to zip."
+    Timestamp=$(date +%F-%H-%M-%S)
+    zipfile="$Destinatio_directory/app-logs-$Timestamp.zip"
+    find $Source_directory -name "*.log" -mtime +$days | zip -@ $zipfile
+
+    if [ -f $zipfile ]
+    then
+        echo " $file zip creation $G success $N"
+        while IFS=read -r filepath
+        do 
+        echo "Removing from Source_directory are : $files"
+        rm -rf $filepath
+        done<<<$files
+        echo "Removal of $files from Source directory $G Success $N"
+    else
+        echo "$file zip creation was $R Failed $N" 
+        exit 1
+    fi
+
+else
+echo "files not found in $Source_directory to zip.. $Y Skipping it $N "
+exit 1
+fi
