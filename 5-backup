@@ -14,7 +14,7 @@ Logfolder="/var/logs/shell-logs"
 Scriptname=$(echo $0 | cut -d '.' -f1)
 logfile="$Logfolder/$Scriptname.log"
 
-if [ $userid -ne 0]
+if [ $userid -ne 0 ]
 then 
 echo "Run this script with root user"
 exit 1
@@ -47,7 +47,7 @@ exit 1
 fi
 
 files=$(find $Source_directory -name "*.log" -mtime +$days)
-if [ ! -z $files]
+if [ !-z $files ]
 then
   echo "files found in $Source_directory to zip."
     Timestamp=$(date +%F-%H-%M-%S)
