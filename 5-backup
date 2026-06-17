@@ -47,11 +47,12 @@ exit 1
 fi
 
 files=$(find $Source_directory -name "*.log" -mtime +$days)
-if [ !-z $files ]
+
+if [ ! -z "$files" ]
 then
   echo "files found in $Source_directory to zip."
     Timestamp=$(date +%F-%H-%M-%S)
-    zipfile="$Destinatio_directory/app-logs-$Timestamp.zip"
+    zipfile="$Destination_directory/app-logs-$Timestamp.zip"
     find $Source_directory -name "*.log" -mtime +$days | zip -@ $zipfile
 
     if [ -f $zipfile ]
@@ -59,7 +60,7 @@ then
         echo " $file zip creation $G success $N"
         while IFS=read -r filepath
         do 
-        echo "Removing from Source_directory are : $files"
+        echo "Removing from Source_directory are : $filepath"
         rm -rf $filepath
         done<<<$files
         echo "Removal of $files from Source directory $G Success $N"
@@ -69,6 +70,6 @@ then
     fi
 
 else
-echo "files not found in $Source_directory to zip.. $Y Skipping it $N "
+echo "files not found in $Source_directory to zip.. $Y Skipping it $N"
 exit 1
 fi
